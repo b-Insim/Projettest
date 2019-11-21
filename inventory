@@ -1,0 +1,4 @@
+server0 ansible_user=root
+
+[all]
+server0
