@@ -1,0 +1,31 @@
+---
+- hosts: dns
+  tasks:
+    - name: Install DNSmasq
+      import_role:
+        name: dnsmasq
+      vars:
+
+#- hosts: wordpress
+#  tasks:
+#    - name: Install Wordpress
+#      import_role:#
+#        name: oefen#web.wordpress
+#      vars:#
+#        word#press_installs:
+#          - n#ame: devops.com
+#            db#host: server0
+#            dbn#ame: devops
+#            dbus#er: devops
+#            path:# /var/www/html/devops.com
+#            url: d#evops.com
+#            title: #"Un wordpress pour les devops"
+#            admin_em#ail: admin@admin.adm
+#            admin_password: admin123
+#            themes:
+#              - name: twentytwelve
+#                activate: true
+#            plugins: []
+#            users: {}
+#            options: []
+#            queries: []

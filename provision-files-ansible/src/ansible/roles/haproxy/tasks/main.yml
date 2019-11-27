@@ -1,0 +1,23 @@
+---
+#1. Cette tâche permet d’installer haproxy (server0) à l’aide du module apt
+- name: "haproxy installation"
+  apt:
+    name: "haproxy"
+    state: "present"
+
+#2. Verifions que haproxy fonctionne correctement
+
+- name: "verifions que HAProxy est la!"
+  lineinfile:
+          dest: /etc/default/haproxy
+          regexp: "^ENABLED.+$"
+          line: "ENABLED=1"
+          state: present
+          # when: ansible_os_family == 'Debian'
+
+#3. Cette tâche active le service haproxy
+- name: "haproxy service activation"
+  service:
+    name: "haproxy"
+    state: "started"
+    enabled: yes

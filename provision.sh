@@ -22,11 +22,11 @@ apt-get install -y \
 if [ "$HOSTNAME" = "control" ]; then
 	apt-get install -y \
 		ansible	
-  
+
 	# J'ajoute les deux clefs sur le noeud de controle
 	mkdir -p /root/.ssh
-	cp /vagrant/projet_rsa /home/vagrant/.ssh/projet_rsa
-	cp /vagrant/projet_rsa.pub /home/vagrant/.ssh/projet_rsa.pub
+	cp /provision-files/projet_rsa /home/vagrant/.ssh/projet_rsa
+	cp /provision-files/projet_rsa.pub /home/vagrant/.ssh/projet_rsa.pub
 	chmod 0600 /home/vagrant/.ssh/*_rsa # ICI
 	chown -R vagrant:vagrant /home/vagrant/.ssh
 
@@ -48,12 +48,16 @@ cat >> /etc/hosts <<MARK
 ## BEGIN PROVISION
 192.168.50.250      control
 192.168.50.10       server0
+192.168.50.20       server1
+192.168.50.30       server2
+192.168.50.40       server3
+192.168.50.50       server4
 ## END PROVISION
 MARK
 
 # J'autorise la clef sur tous les serveurs
 mkdir -p /root/.ssh
-cat /vagrant/projet_rsa.pub >> /root/.ssh/authorized_keys
+cat ./projet_rsa.pub >> /root/.ssh/authorized_keys
 
 # Je vire les duplicata (potentiellement gênant pour SSH)
 sort -u /root/.ssh/authorized_keys > /root/.ssh/authorized_keys.tmp

@@ -1,0 +1,5 @@
+---
+- name: "Installation nfs_server"
+  hosts: "nfsserver"
+  roles:
+    - role: NFS

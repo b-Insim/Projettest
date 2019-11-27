@@ -1,0 +1,5 @@
+---
+- name: "Installation haproxy"
+  hosts: "haproxy"
+  roles:
+    - role: haproxy

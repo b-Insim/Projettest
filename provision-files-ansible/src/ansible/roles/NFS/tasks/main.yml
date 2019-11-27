@@ -1,0 +1,28 @@
+---
+#1. Cette tâche permet d’installer NFS (server4) à l’aide du module apt
+- name: "NFS installation"
+  apt:
+    name:
+      - nfs-common
+      - nfs-kernel-server
+    state: "present"
+
+#2. Verifions les direction d'export des fichiers
+- name: Ensure directories to export exist
+  file: 'path="{{ item.strip().split()[0] }}" state=directory'
+  with_items: "{{ nfs_exports }}"
+  #when: ansible_os_family == 'Debian'
+
+- name: Copy exports file.
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nfs
+
+#3. Cette tâche active le service nfsserver
+- name: Ensure nfs is running.
+  service: "name={{ nfs-kernel-server }} state=started enabled=yes"
+  when: nfs_exports|length

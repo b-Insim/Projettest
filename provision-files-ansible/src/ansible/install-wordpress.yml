@@ -1,0 +1,19 @@
+---
+- name: "wordpress db configuration"
+  hosts: mariadb
+  tags: [ "mariadb", "mysql" ]
+  roles:
+          - role: "wordpress/confbd"
+
+- name: "wordpress apache configuration"
+  hosts: apache
+  tags: "apache"
+  roles:
+          - role: "wordpress/confapache"
+
+
+- name: "wordpress haproxy configuration"
+  hosts: haproxy
+  tags: "haproxy"
+  roles:
+          - role: "wordpress/confhaproxy"
